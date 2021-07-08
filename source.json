@@ -1,0 +1,9 @@
+{"name": "mongo-redpands-source",
+    "config": {
+      "tasks.max":"1",
+      "connector.class":"com.mongodb.kafka.connect.MongoSourceConnector",
+      "connection.uri":"mongodb://mongo1:27017/Stocks?replicaSet=rs0",
+      "database":"Stocks",
+      "collection":"StockData",
+      "copy.existing":"true"
+ }}

@@ -1,0 +1,10 @@
+{"name": "mongo-ts-sink-migrate",
+    "config": {
+      "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
+      "tasks.max":"1",
+      "topics":"Stocks.StockData",
+      "connection.uri":"mongodb://mongo1:27017/?replicaSet=rs0",
+      "database":"Stocks",
+      "collection":"StockDataCopy",
+      "change.data.capture.handler":"com.mongodb.kafka.connect.sink.cdc.mongodb.ChangeStreamHandler"
+ }}
