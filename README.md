@@ -5,7 +5,7 @@ This docker compose spins up the following:
 - Kafka Connect
 - RedPanda 
 
-In this example, we will spin up a ![RedPanda](https://vectorized.io/redpanda) streaming service, configure a single node MongoDB Replica set and configure the MongoDB Connector for Apache Kafka connector.  The connector will be configured to read from the Stocks.StockData collection and write data to a RedPanda topic.  The connection will be configured as a sink to read from the RedPanda topic and write data into the MongoDB collection Stocks.StockDataCopy.
+In this example, we will spin up a [RedPanda](https://vectorized.io/redpanda) streaming service, configure a single node MongoDB Replica set and configure the MongoDB Connector for Apache Kafka connector.  The connector will be configured to read from the Stocks.StockData collection and write data to a RedPanda topic.  The connection will be configured as a sink to read from the RedPanda topic and write data into the MongoDB collection Stocks.StockDataCopy.
 
 To launch execute the shell script `sh run.sh`.
 
