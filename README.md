@@ -1,5 +1,3 @@
-
-
 # MongoDB Kafka Connector and RedPanda
 
 This docker compose spins up the following:
@@ -31,19 +29,61 @@ docker-compose-down -v
 ==============================================================================================================
 ```
 
+## View the status
+
+`sh status.sh`
+
+The status script is a quick way to enumerate the RedPanda topics and the connectors that are configured.  If you do not see any data wait a few seconds for the services to finish starting up.  Once ready, this command will show something similar to the following:
+```
+Kafka topics:
+
+[
+  "docker-connect-offsets",
+  "docker-connect-status",
+  "docker-connect-configs"
+]
+
+The status of the connectors:
+
+
+Currently configured connectors
+
+[]
+
+
+Version of MongoDB Connector for Apache Kafka installed:
+
+{"class":"com.mongodb.kafka.connect.MongoSinkConnector","type":"sink","version":"1.5.1"}
+{"class":"com.mongodb.kafka.connect.MongoSourceConnector","type":"source","version":"1.5.1"}
+```
+
+Once our services are ready, we can configure the source and sink.
+
+
 ## Configure the source connector
+
+The source.json file contains a source configuration for the MongoDB Connector for Apache Kafka.  This configuration tells Kafka Connect to read from the Stocks.StockData collection and write data into the RedPanda "Stocks.StockData" topic.
 
 `curl -X POST -H "Content-Type: application/json" -d @source.json  http://localhost:8083/connectors`
 
+
 ## Configure the sink connector
+
+The sink.json file contains a sink configuration for the MongoDB Connector for Apache Kafka.  This configuration tells Kafka Connect to read from the "Stocks.StockData" RedPanda topic and write to the MongoDB Collection, "Stocks.StockDataCopy".
 
 `curl -X POST -H "Content-Type: application/json" -d @sink.json  http://localhost:8083/connectors`  
 
+
 ## Write some data to the source collection
+
+To insert some sample data, execute the following:
 
 `docker-compose exec mongo1 /usr/bin/mongo --host "mongodb://0.0.0.0/Stocks?replicaSet=rs0"  --eval '''db.StockData.insertOne({'test':123123})''' `
 
+
 ## Read the data in the sink collection
+
+To read data from the MongoDB collection, execute the following:
 
 `docker-compose exec mongo1 /usr/bin/mongo --host "mongodb://0.0.0.0/Stocks?replicaSet=rs0"  --eval '''db.StockDataCopy.find().pretty()''' `
 
