@@ -20,7 +20,7 @@ services:
     - PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
     - --advertise-kafka-addr
     - PLAINTEXT://redpanda:29092,OUTSIDE://localhost:9092
-    image: docker.vectorized.io/vectorized/redpanda:latest
+    image: docker.redpanda.com/vectorized/redpanda:latest
     container_name: redpanda-1
     hostname: redpanda
     networks:
